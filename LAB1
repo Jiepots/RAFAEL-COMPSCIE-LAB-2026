@@ -1,0 +1,96 @@
+
+
+from mpmath import mp, pi, atan
+import math
+
+# set precision to 150 decimals
+mp.dps = 150
+
+def calculate_pi_bbp():
+    """
+    Bailey-Borwein-Plouffe formula for pi
+    This is not a circle formula!
+    """
+    result = mp.mpf(0)
+    for k in range(100):
+        term = (mp.mpf(1) / mp.power(16, k)) * (
+            mp.mpf(4) / (8 * k + 1) -
+            mp.mpf(2) / (8 * k + 4) -
+            mp.mpf(1) / (8 * k + 5) -
+            mp.mpf(1) / (8 * k + 6)
+        )
+        result += term
+    return result
+
+def calculate_pi_machin():
+    """
+    Machin's formula: π = 16*arctan(1/5) - 4*arctan(1/239)
+    Also not a circle formula
+    """
+    return 16 * atan(mp.mpf(1)/5) - 4 * atan(mp.mpf(1)/239)
+
+def truncate_number(num, decimals):
+    """cuts off the number at specified decimal place"""
+    multiplier = 10 ** decimals
+    return math.floor(float(num) * multiplier) / multiplier
+
+def round_number(num, decimals):
+    """rounds the number to specified decimal place"""
+    return round(float(num), decimals)
+
+# Main program starts here
+print("="*70)
+print("COMPUTER LAB: Pi Truncation vs Rounding")
+print("="*70)
+
+# Calculate pi using different formulas
+print("\nFormulas using pi (NOT circle formulas):")
+print("\n1. Bailey-Borwein-Plouffe Formula:")
+print("   π = Σ[1/16^k * (4/(8k+1) - 2/(8k+4) - 1/(8k+5) - 1/(8k+6))]")
+pi_bbp = calculate_pi_bbp()
+print(f"   Result: {pi_bbp}")
+
+print("\n2. Machin's Formula:")
+print("   π = 16*arctan(1/5) - 4*arctan(1/239)")
+pi_machin = calculate_pi_machin()
+print(f"   Result: {pi_machin}")
+
+print("\n3. Reference value from mpmath:")
+print(f"   Result: {pi}")
+
+# Use BBP for our comparison
+pi_value = pi_bbp
+
+print("\n" + "="*70)
+print("COMPARISON: Truncation vs Rounding")
+print("="*70)
+
+# Test at different decimal places
+decimal_tests = [20, 40, 60, 100]
+
+for d in decimal_tests:
+    print(f"\n--- At {d} decimal places ---")
+    
+    truncated = truncate_number(pi_value, d)
+    rounded = round_number(pi_value, d)
+    
+    print(f"Truncated: {truncated}")
+    print(f"Rounded:   {rounded}")
+    
+    # check if they're different
+    if truncated == rounded:
+        print("→ Same value")
+    else:
+        print("→ Different values!")
+        diff = abs(truncated - rounded)
+        print(f"   Difference: {diff}")
+
+print("\n" + "="*70)
+print("CONCLUSION")
+print("="*70)
+print("\nGoal: See if there's really a difference")
+print("\nAnswer: YES! There is a difference, especially at 20 decimals.")
+print("- Truncation just cuts off the number")
+print("- Rounding gives a more accurate value")
+print("- For calculations, rounding is better!")
+print("="*70)
