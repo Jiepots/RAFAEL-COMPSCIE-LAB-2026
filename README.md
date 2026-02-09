@@ -54,9 +54,9 @@ At 20 decimals you can see it clearly - truncation just chops off the number whi
 
 So basically, if you want accurate calculations, use rounding instead of truncation.
 
-======================================================================
+
 COMPUTER LAB: Pi Truncation vs Rounding
-======================================================================
+
 
 Formulas using pi (NOT circle formulas):
 
@@ -68,9 +68,9 @@ Formulas using pi (NOT circle formulas):
    π = 16*arctan(1/5) - 4*arctan(1/239)
    Result: 3.14159265358979323846264338327950288...
 
-======================================================================
+
 COMPARISON: Truncation vs Rounding
-======================================================================
+
 
 --- At 20 decimal places ---
 Truncated: 3.1415926535897936
