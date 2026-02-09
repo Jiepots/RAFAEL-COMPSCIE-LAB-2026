@@ -54,21 +54,6 @@ At 20 decimals you can see it clearly - truncation just chops off the number whi
 
 So basically, if you want accurate calculations, use rounding instead of truncation.
 
-## How to Run
-
-1. Install mpmath:
-```bash
-pip install mpmath
-```
-
-2. Run the program:
-```bash
-python3 pi_lab.py
-```
-
-## Output Screenshot
-
-```
 ======================================================================
 COMPUTER LAB: Pi Truncation vs Rounding
 ======================================================================
